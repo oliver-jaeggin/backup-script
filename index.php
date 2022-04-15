@@ -350,7 +350,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
             if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')) {
               echo '<p>Files and database deleted from server</p>';
             }
-            else if(SITE_HAS_DB == false && unlink(DB_NAME .'.sql')) {
+            else if(SITE_HAS_DB == false) {
               echo '<p>Files deleted from server</p>';
             }
             else {
