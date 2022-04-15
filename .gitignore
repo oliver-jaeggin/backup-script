@@ -1,0 +1,4 @@
+# ignore all files which no content code
+.DS_Store
+
+# ignore folders
