@@ -34,6 +34,8 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
     margin: 2rem 0;
     background-color: #5C0BB3;
     color: #F1F1F1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
     text-decoration: none;
     border: 2px solid #5C0BB3;
     cursor: pointer;
@@ -60,6 +62,9 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
     display: block;
     width: 100%;
     margin-bottom: 2rem;
+  }
+  input {
+    font-size: 1rem;
   }
   input:not([type="checkbox"]) {
     width: 100%;
@@ -193,14 +198,14 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
       <?php elseif($state == '1'): ?>
         <?php
         if(SHELL == true) {
-          $cmd_data = 'tar -cvf '. $file_name .'.tar '. SITE_BASE_DIR . SITE_DIR .'/*';
+          $cmd_data = 'tar -cvf '. $file_name .'.tar '. SITE_BASE_DIR .'/*';
           $output_data = shell_exec($cmd_data);
           $bkp_data = $output_data > '' ? true : false;
         }
         elseif(SHELL != true) {
           try {
             $phar = new PharData($file_name .'.tar');
-            $phar->buildFromDirectory(SITE_BASE_DIR . SITE_DIR .'/.');
+            $phar->buildFromDirectory(SITE_BASE_DIR .'/.');
   
             $bkp_data = true;
             $msg_state_data = 'Compressing files done';
@@ -214,7 +219,7 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
         <?php if($bkp_data == true): ?>
           <p>Created backup of all files sucessfully🎉</p>
           <p>Go on with backup of database:</p>
-          <a href="<?php echo $url .'?s=2'; ?>">Start</a>
+          <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>">Start</a>
         <?php elseif($bkp_data == false): ?>
           <p>Error during backup: <?php echo $msg_state_db; ?></p>
         <?php endif; ?>
@@ -315,7 +320,9 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
         if($zip->open($file_name .'.zip', ZipArchive::CREATE) === TRUE) {
           // Add files to the zip file
           $zip->addFile($file_name .'.tar');
-          $zip->addFile(DB_NAME .'.sql');
+          if(SITE_HAS_DB == true) {
+            $zip->addFile(DB_NAME .'.sql');
+          }
       
           // All files are added, so close the zip file.
           $zip->close();
@@ -353,6 +360,25 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
         }
         else {
           echo '<p>Error during deleting backup files, please check manually!</p>';
+        }
+        if(unlink($file_name .'.zip')) {
+          if(unlink($file_name .'.tar')) {
+            if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')) {
+              echo '<p>Files and database deleted from server</p>';
+            }
+            else if(SITE_HAS_DB == false && unlink(DB_NAME .'.sql')) {
+              echo '<p>Files deleted from server</p>';
+            }
+            else {
+              echo '<p>Error during deleting backup database, please check manually!</p>';
+            }
+          }
+          else {
+            echo '<p>Error during deleting backup files, please check manually!</p>';
+          }
+        }
+        else {
+          echo '<p>Error during deleting ZIP-File, please check manually!</p>';
         }
         ?>
 
