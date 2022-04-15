@@ -1,19 +1,21 @@
-# Backup Script - Execute and download a backpu from an applikation directly in the browser
+# Backup Script
+Execute and download a backpu from an applikation directly in the browser
+
 ## Features
-- Lightweight script
-- Easy setup
 - Creates a archive of all files of an application
 - Creates a database dump
 - Download all data as a ZIP file to store localy
+- Lightweight script and easy setup
 
 ## Installation
 1. Downlaod the repository.
-2. Upload the ZIP file into the root folder of your application and extract the archive. Rename it to `backup-script`.
+2. Upload the ZIP file into the root folder of your application
+3. Extract the archive and rename the folder to `backup-script`.
 
 > The script works aswell if you upload it in a subfolder of, but it's recommended to upload directly in your root folder.
 
-3. Start the setup using your `your-domain.tld/backup-script`. If you uploaded it in a subfolder, so complete the path in the url with the subfolders as example `your-domain.tld/my/subfolders/backup-script`.
-4. Setup the configuration which is explained in the next chapter
+4. Start the setup using your `your-domain.tld/backup-script`. If you uploaded it in a subfolder, so complete the path in the url with the subfolders as example `your-domain.tld/my/subfolders/backup-script`.
+5. Setup the configuration which is explained in the next chapter
 
 ## Configuration
 First time you call the backup script it will be created a configuration file. The script detects if it's possible use shell commands or if your server doesn't allow shell access.
