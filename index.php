@@ -141,7 +141,7 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
         <a href="index.php">Start your first backup</a>
 
       <?php else: ?>
-        <form action="index.php" method="POST">
+        <form action="index.php?s=0" method="POST">
           <?php
           ini_set('max_execution_time', '300');
           ini_set('set_time_limit', '0');
