@@ -12,7 +12,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a backup of <?php echo $site_name; ?><</title>
+  <title>Create a backup of <?php echo SITE_NAME; ?></title>
 </head>
 <style>
   body {
@@ -227,7 +227,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php elseif($state == '2'): ?>
         <?php
         if(SHELL == true) {
-          $cmd_db = 'mysqldump '. DB_NAME .' > '. DB_NAME .'.sql -u '. DB_USER .' -p"'. DB_PASSWORD .'"';
+          $cmd_db = 'mysqldump '. DB_NAME .' > '. DB_NAME .'.sql -u '. DB_USER .' -p\''. DB_PASSWORD .'\'';
           $output_db = shell_exec($cmd_db);
           $bkp_db = $output_db > '' ? true : false;
         }
