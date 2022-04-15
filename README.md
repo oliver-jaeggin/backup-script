@@ -8,7 +8,7 @@
 
 ## Installation
 1. Downlaod the repository.
-2. Upload the ZIP file into the root folder of your application and extract the archive.
+2. Upload the ZIP file into the root folder of your application and extract the archive. Rename it to `backup-script`.
 
 > The script works aswell if you upload it in a subfolder of, but it's recommended to upload directly in your root folder.
 
