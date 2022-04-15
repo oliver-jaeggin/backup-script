@@ -218,7 +218,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         ?>
         <?php if($bkp_data == true): ?>
           <p>Created backup of all files sucessfully🎉</p>
-          <p>Go on with backup of database:</p>
+          <?php echo SITE_HAS_DB == true ? '<p>Go on with backup of database:</p>' : '<p>Compress data in a ZIP archive and prepare for download:</p>'; ?>
           <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>">Start</a>
         <?php elseif($bkp_data == false): ?>
           <p>Error during backup: <?php echo $msg_state_db; ?></p>
@@ -345,22 +345,6 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
 
       <?php elseif($state == '4'): ?>
         <?php
-        if(unlink($file_name .'.tar')) {
-          if(unlink(DB_NAME .'.sql')) {
-            if(unlink($file_name .'.zip')) {
-              echo '<p>Files and database deleted from server</p>';
-            }
-            else {
-              echo '<p>Error during deleting ZIP-File, please check manually!</p>';
-            }
-          }
-          else {
-            echo '<p>Error during deleting backup database, please check manually!</p>';
-          }
-        }
-        else {
-          echo '<p>Error during deleting backup files, please check manually!</p>';
-        }
         if(unlink($file_name .'.zip')) {
           if(unlink($file_name .'.tar')) {
             if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')) {
