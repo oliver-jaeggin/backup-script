@@ -4,6 +4,7 @@ $state = isset($_GET['s']) ? $_GET['s'] : '0';
 include('config.php');
 $config = defined('CONFIG') ? CONFIG : false;
 $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
+$url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_DIR .'/index.php' : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +139,7 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
         fclose($handle);
         ?>
         <p>Setup configuration sucessfully</p>
-        <a href="index.php?s=0">Start your first backup</a>
+        <a href="<?php echo $url .'?s=0'; ?>" onclick="window.location.reload()">Start your first backup</a>
 
       <?php else: ?>
         <form action="index.php" method="POST">
@@ -188,12 +189,11 @@ $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
       <?php endif; ?>
 
     <?php elseif($config == true): ?>
-      <!--<a href="index.php?setting=config">Change configuration</a>-->
       <h1>Create a backup (step <?php echo $state; ?>)</h1>
       <?php if($state == '0'): ?>
         <p>Create backup for website "<?php echo SITE_NAME; ?>".</p>
         <p>Ceate backup of all files in direcotroy:</p>
-        <a href="<?php echo 'http://'. SITE_URL . SITE_DIR .'/index.php?s=1'; ?>">Start</a>
+        <a href="<?php echo $url .'?s=1'; ?>">Start</a>
       
       <?php elseif($state == '1'): ?>
         <?php
