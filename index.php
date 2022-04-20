@@ -1,4 +1,3 @@
-
 <?php
 $state = isset($_GET['s']) ? $_GET['s'] : '0';
 include('config.php');
@@ -12,7 +11,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a backup of <?php echo SITE_NAME; ?></title>
+  <title>Create a backup of "<?php echo SITE_NAME; ?>"</title>
 </head>
 <style>
   body {
@@ -198,9 +197,10 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php elseif($state == '1'): ?>
         <?php
         if(SHELL == true) {
-          $cmd_data = 'tar -cvf '. $file_name .'.tar '. SITE_BASE_DIR .'/*';
+          $cmd_data = 'tar --index-file=error_tar -v -c -f '. $file_name .'.tar '. SITE_BASE_DIR .'/*';
           $output_data = shell_exec($cmd_data);
-          $bkp_data = $output_data > '' ? true : false;
+          $log_data = file_get_contents('error_tar');
+          $bkp_data = $log_data > '' ? true : false;
         }
         elseif(SHELL != true) {
           try {
@@ -227,9 +227,10 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php elseif($state == '2'): ?>
         <?php
         if(SHELL == true) {
-          $cmd_db = 'mysqldump '. DB_NAME .' > '. DB_NAME .'.sql -u '. DB_USER .' -p\''. DB_PASSWORD .'\'';
+          $cmd_db = 'mysqldump --log-error=error_mysqldump '. DB_NAME .' > '. DB_NAME .'.sql -u '. DB_USER .' -p\''. DB_PASSWORD .'\'';
           $output_db = shell_exec($cmd_db);
-          $bkp_db = $output_db > '' ? true : false;
+          $log_db = file_get_contents('error_mysqldump');
+          $bkp_db = $log_db > '' ? false : true;
         }
         elseif(SHELL != true) {
           if(DB_NAME && DB_HOST && DB_USER && DB_PASSWORD) {
@@ -345,6 +346,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
 
       <?php elseif($state == '4'): ?>
         <?php
+        // cleanup created files
         if(unlink($file_name .'.zip')) {
           if(unlink($file_name .'.tar')) {
             if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')) {
@@ -364,6 +366,9 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         else {
           echo '<p>Error during deleting ZIP-File, please check manually!</p>';
         }
+        // cleanup log files
+        unlink('error_tar');
+        unlink('error_mysqldump');
         ?>
 
       <?php endif; ?> 
