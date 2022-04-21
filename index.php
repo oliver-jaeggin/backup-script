@@ -200,7 +200,14 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
           $cmd_data = 'tar --index-file=error_tar -v -c -f '. $file_name .'.tar '. SITE_BASE_DIR .'/*';
           $output_data = shell_exec($cmd_data);
           $log_data = file_get_contents('error_tar');
-          $bkp_data = $log_data > '' ? true : false;
+          if($log_data > '') {
+            $bkp_data = true;
+            $msg_state_data = 'Compressing files done';
+          }
+          else {
+            $bkp_data = false;
+            $msg_state_data = 'Error during compressing files with the following command:<br><pre>'. $cmd_data .'</pre>';
+          }
         }
         elseif(SHELL != true) {
           try {
@@ -230,7 +237,14 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
           $cmd_db = 'mysqldump --log-error=error_mysqldump '. DB_NAME .' > '. DB_NAME .'.sql -u '. DB_USER .' -p\''. DB_PASSWORD .'\'';
           $output_db = shell_exec($cmd_db);
           $log_db = file_get_contents('error_mysqldump');
-          $bkp_db = $log_db > '' ? false : true;
+          if($log_db > '') {
+            $bkp_db = false;
+            $msg_state_db = 'Error during backup of database:<br><pre>'. $log_db .'</pre>';
+          }
+          else {
+            $bkp_db = true;
+            $msg_state_db = 'Backup of database done';
+          }
         }
         elseif(SHELL != true) {
           if(DB_NAME && DB_HOST && DB_USER && DB_PASSWORD) {
