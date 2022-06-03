@@ -1,6 +1,6 @@
 <?php
 $state = isset($_GET['s']) ? $_GET['s'] : '0';
-include('config.php');
+file_exists('config.php') ? include('config.php') : '';
 $config = defined('CONFIG') ? CONFIG : false;
 $file_name = defined('SITE_NAME') ? date('ymd') .'_bkp_'. SITE_NAME : '';
 $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_DIR .'/index.php' : '';
@@ -11,7 +11,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a backup of "<?php echo SITE_NAME; ?>"</title>
+  <title>Create a backup of "<?php echo defined('SITE_NAME') ? SITE_NAME : ''; ?>"</title>
 </head>
 <style>
   body {
@@ -126,7 +126,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         $file_config = $site_base_dir . $site_dir . '/config.php';
         $handle = fopen($file_config, 'a');
         $data = 
-          "\n## Basic configuration\ndefine('SHELL', '". $shell ."');\ndefine('SITE_NAME', '". $site_name ."');\ndefine('SITE_HAS_DB', '". $site_db ."');\ndefine('SITE_BASE_DIR', '". $site_base_dir ."');\ndefine('SITE_DIR', '". $site_dir ."');\ndefine('SITE_URL', '". $site_url ."');\n##";
+          "<?php\n## Basic configuration\ndefine('SHELL', '". $shell ."');\ndefine('SITE_NAME', '". $site_name ."');\ndefine('SITE_HAS_DB', '". $site_db ."');\ndefine('SITE_BASE_DIR', '". $site_base_dir ."');\ndefine('SITE_DIR', '". $site_dir ."');\ndefine('SITE_URL', '". $site_url ."');\n##";
         fwrite($handle, $data);
         if($site_db == 'true') {
           $data = "\n## Configuration database\ndefine('DB_NAME', '". $site_db_name ."');\ndefine('DB_USER', '". $site_db_user ."');\ndefine('DB_PASSWORD', '". $site_db_psw ."');\ndefine('DB_HOST', '". $site_db_host ."');\n##";

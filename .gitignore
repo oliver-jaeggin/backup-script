@@ -1,4 +1,4 @@
 # ignore all files which no content code
 .DS_Store
-
+config.php
 # ignore folders
