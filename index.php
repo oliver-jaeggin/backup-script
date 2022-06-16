@@ -226,7 +226,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         <?php if($bkp_data == true): ?>
           <p>Created backup of all files sucessfully🎉</p>
           <?php echo SITE_HAS_DB == true ? '<p>Go on with backup of database:</p>' : '<p>Compress data in a ZIP archive and prepare for download:</p>'; ?>
-          <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>"><?php echo SITE_HAS_DB == true ? '<p>Backup database' : 'Create ZIP archive'; ?></a>
+          <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>"><?php echo SITE_HAS_DB == true ? 'Backup database' : 'Create ZIP archive'; ?></a>
         <?php elseif($bkp_data == false): ?>
           <p>Error during backup: <?php echo $msg_state_db; ?></p>
         <?php endif; ?>
