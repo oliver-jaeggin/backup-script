@@ -192,7 +192,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php if($state == '0'): ?>
         <p>Create backup for website "<?php echo SITE_NAME; ?>".</p>
         <p>Ceate backup of all files in direcotroy:</p>
-        <a href="<?php echo $url .'?s=1'; ?>">Start</a>
+        <a href="<?php echo $url .'?s=1'; ?>">Backup files</a>
       
       <?php elseif($state == '1'): ?>
         <?php
@@ -226,7 +226,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         <?php if($bkp_data == true): ?>
           <p>Created backup of all files sucessfully🎉</p>
           <?php echo SITE_HAS_DB == true ? '<p>Go on with backup of database:</p>' : '<p>Compress data in a ZIP archive and prepare for download:</p>'; ?>
-          <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>">Start</a>
+          <a href="<?php echo SITE_HAS_DB == true ? $url .'?s=2' : $url .'?s=3'; ?>"><?php echo SITE_HAS_DB == true ? '<p>Backup database' : 'Create ZIP archive'; ?></a>
         <?php elseif($bkp_data == false): ?>
           <p>Error during backup: <?php echo $msg_state_db; ?></p>
         <?php endif; ?>
@@ -323,7 +323,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         <?php if($bkp_db == true): ?>
           <p>Created backup of database sucessfully🎉</p>
           <p>Compress data in a ZIP archive and prepare for download:</p>
-          <a href="<?php echo $url .'?s=3'; ?>">Start</a>
+          <a href="<?php echo $url .'?s=3'; ?>">Create ZIP archive</a>
         <?php elseif($bkp_db == false): ?>
           <p>Error during backup: <?php echo $msg_state_db; ?></p>
         <?php endif; ?>
@@ -353,7 +353,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
           <p>Created ZIP archive sucessfully🎉</p>
           <a href="<?php echo $file_name .'.zip'; ?>" target="_blank">Download ZIP</a>
           <p>Delete backup from server:</p>
-          <a href="<?php echo $url .'?s=4'; ?>">Finish</a>
+          <a href="<?php echo $url .'?s=4'; ?>">Finish and cleanup</a>
         <?php elseif($bkp_zip == false): ?>
           <p>Error during compressing files: <?php echo $msg_state_zip; ?></p>
         <?php endif; ?>
