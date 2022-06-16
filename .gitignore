@@ -1,6 +1,8 @@
 # ignore all files which no content code
-.DS_Store
-.well-known
-config.php
-# ignore folders
-cgi-bin
+*
+!.gitignore
+!index.php
+!LICENSE
+!README.md
+# ignore all folders
+*/
