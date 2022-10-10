@@ -381,8 +381,12 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
           echo '<p>Error during deleting ZIP-File, please check manually!</p>';
         }
         // cleanup log files
-        unlink('error_tar');
-        unlink('error_mysqldump');
+        if(unlink('error_tar') || unlink('error_mysqldump')) {
+          echo '<p>Error and log files deleted</p>';
+        }
+        else {
+          echo '<p>No error and log files to cleanup</p>';
+        }
         ?>
 
       <?php endif; ?> 
