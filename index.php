@@ -49,6 +49,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
   }
   a svg, button svg {
     visibility: hidden;
+    margin-left: -30px;
   }
   a[disabled], button:disabled {
     background-color: grey;
