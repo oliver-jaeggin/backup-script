@@ -233,7 +233,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php elseif($state == '1'): ?>
         <?php
         if(SHELL == true) {
-          $cmd_data = 'tar --index-file=error_tar -v -c -f '. $file_name .'.tar '. SITE_BASE_DIR .'/*';
+          $cmd_data = 'tar --index-file=error_tar -v -c -f '. $file_name .'.tar '. SITE_BASE_DIR .'/';
           $output_data = shell_exec($cmd_data);
           $log_data = file_get_contents('error_tar');
           if($log_data > '') {
