@@ -416,10 +416,10 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
           <?php if(unlink($file_name .'.tar')): ?>
             <?php if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')): ?>
               <p>Files and database deleted from server</p>
-              <a href="<?php echo SITE_URL; ?>">Show website</a>
+              <a href="https://<?php echo SITE_URL; ?>/">Show website <?php echo SITE_URL; ?></a>
             <?php elseif(SITE_HAS_DB == false): ?>
               <p>Files deleted from server</p>
-              <a href="<?php echo SITE_URL; ?>">Show website</a>
+              <a href="https://<?php echo SITE_URL; ?>/">Show website <?php echo SITE_URL; ?></a>
             <?php else: ?>
               <p>Error during deleting backup database, please check manually!</p>
             <?php endif; ?>
