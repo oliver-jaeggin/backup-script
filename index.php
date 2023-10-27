@@ -412,25 +412,24 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <?php elseif($state == '4'): ?>
         <?php
         // cleanup created files
-        if(unlink($file_name .'.zip')) {
-          if(unlink($file_name .'.tar')) {
-            if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')) {
-              echo '<p>Files and database deleted from server</p>';
-            }
-            else if(SITE_HAS_DB == false) {
-              echo '<p>Files deleted from server</p>';
-            }
-            else {
-              echo '<p>Error during deleting backup database, please check manually!</p>';
-            }
-          }
-          else {
-            echo '<p>Error during deleting backup files, please check manually!</p>';
-          }
-        }
-        else {
-          echo '<p>Error during deleting ZIP-File, please check manually!</p>';
-        }
+        if(unlink($file_name .'.zip')): ?>
+          <?php if(unlink($file_name .'.tar')): ?>
+            <?php if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')): ?>
+              <p>Files and database deleted from server</p>
+              <a href="<?php echo SITE_URL; ?>">Show website</a>
+            <?php else if(SITE_HAS_DB == false): ?>
+              <p>Files deleted from server</p>
+              <a href="<?php echo SITE_URL; ?>">Show website</a>
+            <?php else: ?>
+              <p>Error during deleting backup database, please check manually!</p>
+            <?php endif; ?>
+          <?php else: ?>
+            <p>Error during deleting backup files, please check manually!</p>
+          <?php endif; ?>
+        <?php else: ?>
+          <p>Error during deleting ZIP-File, please check manually!</p>
+        <?php endif; ?>
+        <?php
         // cleanup log files
         if(file_exists('error_tar')) {
           unlink('error_tar');
