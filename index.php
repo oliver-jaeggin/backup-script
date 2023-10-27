@@ -417,7 +417,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
             <?php if(SITE_HAS_DB == true && unlink(DB_NAME .'.sql')): ?>
               <p>Files and database deleted from server</p>
               <a href="<?php echo SITE_URL; ?>">Show website</a>
-            <?php else if(SITE_HAS_DB == false): ?>
+            <?php elseif(SITE_HAS_DB == false): ?>
               <p>Files deleted from server</p>
               <a href="<?php echo SITE_URL; ?>">Show website</a>
             <?php else: ?>
