@@ -33,6 +33,8 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
     justify-content: center;
     align-content: center;
     gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
     padding: 1rem;
     margin: 2rem 0;
     background-color: #5C0BB3;
