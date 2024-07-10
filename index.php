@@ -58,7 +58,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
     opacity: 0.7;
     cursor: not-allowed;
   }
-  a[disabled] svg, button:disabled {
+  a[disabled] svg, button:disabled svg {
     visibility: visible;
     animation: 3s linear 0s infinite normal spinning-button;
   }
