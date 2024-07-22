@@ -405,7 +405,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
         ?>
         <?php if($bkp_zip == true): ?>
           <p>Created ZIP archive sucessfully🎉</p>
-          <a href="<?php echo $file_name .'.zip'; ?>" target="_blank">Download ZIP [<?php echo number_format((filesize($file_name .'.zip') / pow(1024, 2)), 2, '.', "'"); ?> MB]</a>
+          <a href="<?php echo $file_name .'.zip'; ?>" target="_blank">Download ZIP [<?php echo number_format((filesize($file_name .'.zip') / pow(1024, 2)), 0, '.', "'"); ?> MB]</a>
           <p>Delete backup from server:</p>
           <a href="<?php echo $url .'?s=4'; ?>" onclick="this.setAttribute('disabled', '')">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
