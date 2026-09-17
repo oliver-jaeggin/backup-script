@@ -277,7 +277,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
             <span><?php echo SITE_HAS_DB == true ? 'Backup database' : 'Create ZIP archive'; ?></span>
           </a>
         <?php elseif($bkp_data == false): ?>
-          <p>Error during backup: <?php echo $msg_state_db; ?></p>
+          <p>Error during backup: <?php echo $msg_state_data; ?></p>
         <?php endif; ?>
 
       <?php elseif($state == '2'): ?>
