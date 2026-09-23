@@ -229,7 +229,7 @@ $url = defined('SITE_URL') && defined('SITE_DIR') ? 'http://'. SITE_URL . SITE_D
       <h1>Create a backup (step <?php echo $state; ?>)</h1>
       <?php if($state == '0'): ?>
         <p>Create backup for website "<?php echo SITE_NAME; ?>".</p>
-        <p>Ceate backup of all files in direcotroy:</p>
+        <p>Ceate backup of all files in directory:</p>
         <pre><?php echo SITE_BASE_DIR; ?></pre>
         <a href="<?php echo $url .'?s=1'; ?>" onclick="this.setAttribute('disabled', '')">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
